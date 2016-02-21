@@ -1,0 +1,23 @@
+{
+  "name": "carpe-diem",
+  "version": "1.0.0",
+  "description": "This is the main repository for the CarpeDiem project",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js",
+	"start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WWDDIWU/CarpeDiem.git"
+  },
+  "author": "WWDDIWU",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/WWDDIWU/CarpeDiem/issues"
+  },
+  "homepage": "https://github.com/WWDDIWU/CarpeDiem#readme",
+  "dependencies": {
+    "ember": "^0.9.8"
+  }
+}
