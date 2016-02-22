@@ -17,10 +17,10 @@ mongoose.connect('mongodb://169.53.137.142/wwddiwu');
 
 describe('Test the whole api', function() {
 
-	const owner = 'mrrobot';
+	const owner = 'kingmarv';
 
 	let dayID;
-	let locationID;
+	let mumID, workID;
 
 	// Remove everything from mrrobot
 	before(function() {
@@ -35,9 +35,9 @@ describe('Test the whole api', function() {
 
 			const user = {
 				firstname: 'Test',
-				lastname: 'Name',
+				lastname: 'User',
 				username: owner,
-				email: 'test@test.de',
+				email: 'test@test.com',
 				password: '125d6d03b32c84d492747f79cf0bf6e179d287f341384eb5d6d3197525ad6be8e6df0116032935698f99a09e265073d1d6c32c274591bf1d0a20ad67cba921bc',
 			    salt: 'test',
 			    devices: [],
@@ -77,10 +77,26 @@ describe('Test the whole api', function() {
 				longitude: 49,
 				events: [],
 				owner: owner,
-				name: 'Mamas haus'
+				name: 'Home'
 			};
 			locationManager.newLocation(responseObj, owner, function(err, location) {
-				locationID = location.location.id;
+				mumID = location.location.id;
+				done();
+			});
+		});
+	});
+
+	describe('Create location', function() {
+		it('create location', function(done) {
+			const responseObj = {
+				latitude: 12,
+				longitude: 49,
+				events: [],
+				owner: owner,
+				name: 'Work'
+			};
+			locationManager.newLocation(responseObj, owner, function(err, location) {
+				workID = location.location.id;
 				done();
 			});
 		});
@@ -91,13 +107,13 @@ describe('Test the whole api', function() {
 			this.timeout(5000);
 			const event = {
                 priority: 1,
-                title: 'Kuchen backen',
-                description: 'Mit Mama Kuchen backen',
+                title: 'Eating cookies',
+                description: 'I like eating cookies. That\'s what I do',
                 suggestion: false,
-                location: locationID,
+                location: mumID,
                 day: null,
                 type: 1,
-                start: (new Date()).setHours(8),
+                start: (new Date()).setHours(9),
                 end: (new Date()).setHours(12),
                 duration: null
 			};
@@ -105,9 +121,51 @@ describe('Test the whole api', function() {
 			eventManager.newEvent(event, owner, function(err, event) {
 				done();
 			});
-
 		});
 	});
 
+	describe('Create event', function() {
+		it('create event', function(done) {
+			this.timeout(5000);
+			const event = {
+                priority: 1,
+                title: 'Making cookies',
+                description: 'I like to bake cookies to eat them',
+                suggestion: false,
+                location: mumID,
+                day: null,
+                type: 1,
+                start: (new Date()).setHours(7),
+                end: (new Date()).setHours(9),
+                duration: null
+			};
+
+			eventManager.newEvent(event, owner, function(err, event) {
+				done();
+			});
+		});
+	});
+
+	describe('Create event', function() {
+		it('create event', function(done) {
+			this.timeout(5000);
+			const event = {
+				priority: 1,
+				title: 'Working',
+				description: '',
+				suggestion: false,
+				location: workID,
+				day: null,
+				type: 1,
+				start: (new Date()).setHours(14),
+				end: (new Date()).setHours(20),
+				duration: null
+			};
+
+			eventManager.newEvent(event, owner, function(err, event) {
+				done();
+			});
+		});
+	});
 
 });

@@ -142,7 +142,7 @@ exports.newDay = function(day, owner, callback) {
                     UserModel.findOne({
                         _id: owner
                     }, function(err, user) {
-                        user.timeline.push(dayObj.id.toString());
+                        user.timeline.push(dayObj.id;
                         console.log(user.timeline);
 
                         user.save();
@@ -246,7 +246,7 @@ exports.addEventToDay = function(dayID, owner, eventID, callback) {
         _id: dayID,
         owner: owner
     }, function(err, day) {
-        day.events.push(eventID.toString());
+        day.events.push(eventID);
         sortDay(day, function(err, sortedDay) {
             if (err) {
                 console.error(err);

@@ -121,7 +121,7 @@ exports.addEventToLocation = function(locationID, owner, eventID, callback) {
         _id: locationID,
         owner: owner
     }, function(err, location) {
-            location.events.push(eventID.toString());
+            location.events.push(eventID);
 			console.log(location);
             location.save(function(err) {
                 if (typeof callback === 'function') {
